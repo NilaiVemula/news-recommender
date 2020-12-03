@@ -19,7 +19,8 @@ Category: Text Analysis/ Natural Language Processing
 - Clean and select the data in Python (5 pts)
 - Embed word vectors using `word2vec` to categorize each post/article (5 pts)
 - Train a machine learning model to categorize between conservative-leaning and liberal-leaning news articles (10 pts)
-- Build a web API ?
+- Communicated 250-500 words explaining the project goals and outcomes. (10 pts)
+- Build a web API (Extra credit: 3 pts)
 
 Basic Text Analysis Rubric:
 
