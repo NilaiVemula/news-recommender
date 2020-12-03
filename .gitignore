@@ -132,3 +132,6 @@ dmypy.json
 
 /notebooks/secrets.py
 /scripts/secrets.py
+
+
+models/GoogleNews-vectors-negative300.bin.gz
