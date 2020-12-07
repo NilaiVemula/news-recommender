@@ -217,9 +217,9 @@
         
         <p>For the last part of this project, I built a web application to make recommendations on news articles. It begins by prompting the user for a topic. I then use the <a href="https://pypi.org/project/GoogleNews/">GoogleNews</a> Python library to locate 25 news articles about that topic. I use the same procedure as earlier to parse these articles, clean their contents, generate a document vector, and use the XGBoost classifier model to compute the probability of this article being popular in a left- or right-leaning subreddit. Finally, I take the two most extreme probabilities and recommend one left-leaning news article and one right-leaning news article to the user.</p>
         
-        <p>There are limitations to this model. The process of scraping the news articles and using word2vec to generate the document vector takes a significant amount of time and processing power. For this reason, I was not able to deploy this web application and release it publicly, but I got a version running on my local computer. Here is a demo video:</p>
+        <p>There are limitations to this model. The process of scraping the news articles and using word2vec to generate the document vector takes a significant amount of time and processing power. For this reason, I was not able to deploy this web application and release it publicly, but I got a version running on my local computer. Here is a <a href="https://www.youtube.com/embed/tgpTd4ocXXg">demo video:</a> </p>
         <figure class="iframe-wrapper">
-            <iframe width="853" height="480" src="https://youtu.be/tgpTd4ocXXg" frameborder="0" allowfullscreen></iframe>
+            <iframe width="853" height="480" src="https://www.youtube.com/embed/tgpTd4ocXXg" frameborder="0" allowfullscreen></iframe>
           </figure>
         
 
@@ -231,8 +231,8 @@
         
         <p>In this example, I searched for articles using the keyword "president." The recommended articles were:</p>
 
-        <ul>Left-leaning: </ul>
-        <ul>Right-leaning: </ul>
+        <ul>Left-leaning: <a href="https://www.washingtonpost.com/graphics/2020/lifestyle/magazine/trump-presidential-norm-breaking-list/">Washington Post article</a></ul>
+        <ul>Right-leaning: <a href="https://www.nj.com/sports/2020/12/greatest-president-in-my-lifetime-legendary-coach-lou-holtz-fawns-over-donald-trump-during-medal-of-freedom-ceremony.html">New Jersey Sports article</a> </ul>
 
         <p>From reading these articles, it is apparent that I would classify these articles in a similar fashion. The first one is an opinion piece that portrays optimism for President-Elect Biden and Vice President-Elect Harris whereas the second one is a positive depiction of President Trump. </p>
       </section>

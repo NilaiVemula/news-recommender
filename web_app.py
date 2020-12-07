@@ -152,7 +152,7 @@ googlenews.clear()
 
 #### DISPLAY OUTPUT
 
-st.header("Left-leaning")
+st.header("Right-leaning")
 
 if(len(df[df['prediction'] > 0.5])):
     st.write(df['url'].iloc[0])
@@ -161,7 +161,7 @@ else:
     st.write('Sorry, I could not find any articles for you.')
 
 
-st.header("Right-leaning")
+st.header("Left-leaning")
 
 if(len(df[df['prediction'] < 0.5])):
     st.write(df['url'].iloc[-1])
