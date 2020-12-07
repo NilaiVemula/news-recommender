@@ -116,120 +116,127 @@
             <img src="PCA.png" alt="PCA" />
           </figure>
         
-        <p>It is disappointing that there is not a clear separation between the blue and red points. This indicates that our classification model will have a difficult time distinguishing between the two types of articles. However, if we look at the plot below, we can see that the first two principal components make up a very small percent of the overall variance in the dataset. Our classification model will therefore likely use many more than 2 out of 300 features.</p>
+        <p>It is disappointing that there is not a clear separation between the blue and red points. This indicates that our classification model will have a difficult time distinguishing between the two types of articles. However, if we look at the plot below, we can see that the first two principal components make up a very small percent of the overall variance in the dataset. Our classification model will therefore likely use many more than 2 out of 300 features. If we were to visualize this dataset in 100 or 150 dimensions, it is possible, we would see two distinct groupings of blue dots and red dotes.</p>
 
         <figure>
-        <label for="pca2" class="margin-toggle">&#8853;</label><input type="checkbox" id="pca2" class="margin-toggle"/><span class="marginnote">Explained Variance by Principal Components</span>
+        <label for="pca2" class="margin-toggle">&#8853;</label><input type="checkbox" id="pca2" class="margin-toggle"/><span class="marginnote">Explained Cumulative Variance by the Number of Principal Components</span>
         <img src="PCA2.png" alt="PCA2" />
         </figure>
       </section>
 
       <section>
-        <h2 id="classification">Building a Binary Classifier</h2>
-        <div class="epigraph">
-          <blockquote>
-            <p>The English language . . . becomes ugly and inaccurate because our thoughts are foolish, but the slovenliness of our language makes it easier for us to have foolish thoughts.</p>
-            <footer>George Orwell, “Politics and the English Language”</footer>
-          </blockquote>
-          <blockquote>
-            <p>For a successful technology, reality must take precedence over public relations, for Nature cannot be fooled.</p>
-            <footer>Richard P. Feynman, <cite>“What Do You Care What Other People Think?”</cite></footer>
-          </blockquote>
-          <blockquote>I do not paint things, I paint only the differences between things.<footer>Henri Matisse, <cite>Henri Matisse Dessins: thèmes et variations</cite> (Paris, 1943), 37</footer></blockquote>
-        </div>
-        <p>If you’d like to introduce your page or a section of your page with some quotes, use epigraphs. Modeled after chapter epigraphs in Tufte’s books (particularly <em>Beautiful Evidence</em>), these are <code>blockquote</code> elements with a bit of specialized styling. Quoted text is italicized. The source goes in a <code>footer</code> element inside the <code>blockquote</code>. We have provided three examples in the epigraph of this section, demonstrating shorter and longer quotes, with and without a paragraph tag, and showing how multiple quotes within an epigraph fit together with the use of a wrapper class.</p>
-      </section>
+        <h2 id="classifier">Building a Binary Classifier</h2>
+        
+        <p> Now that our data can be represented in a numeric format, we can build a machine learning model to serve as a binary classifier. This model will have two outputs (right-lean or left-lean), and the input will be a the document vector of a news article. We have a few limitations on our model because our dataset is imbalanced. From earlier, we had more left-leaning news articles than right-leaning ones. For the purpose of encoding our data, the right-leaning articles are positives (1) and the left-leaning articles are negatives (0).</p>
 
-      <section>
-        <h2 id="sidenotes">Sidenotes: Footnotes and Marginal Notes</h2>
-        <p>One of the most distinctive features of Tufte’s style is his extensive use of sidenotes.<label for="sn-extensive-use-of-sidenotes" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-extensive-use-of-sidenotes" class="margin-toggle"/><span class="sidenote">This is a sidenote.</span> Sidenotes are like footnotes, except they don’t force the reader to jump their eye to the bottom of the page, but instead display off to the side in the margin. Perhaps you have noticed their use in this document already. You are very astute.</p>
-        <p>Sidenotes are a great example of the web not being like print. On sufficiently large viewports, Tufte CSS uses the margin for sidenotes, margin notes, and small figures. On smaller viewports, elements that would go in the margin are hidden until the user toggles them into view. The goal is to present related but not necessary information such as asides or citations <em>as close as possible</em> to the text that references them. At the same time, this secondary information should stay out of the way of the eye, not interfering with the progression of ideas in the main text.</p>
-        <p>Sidenotes consist of two elements: a superscript reference number that goes inline with the text, and a sidenote with content. To add the former, just put a label and dummy checkbox into the text where you want the reference to go, like so:</p>
-        <pre><code>&lt;label for="sn-demo"
-       class="margin-toggle sidenote-number"&gt;
-&lt;/label&gt;
-&lt;input type="checkbox"
-       id="sn-demo"
-       class="margin-toggle"/&gt;</code></pre>
-        <p>You must manually assign a reference <code>id</code> to each side or margin note, replacing “sn-demo” in the <code>for</code> and the <code>id</code> attribute values with an appropriate descriptor. It is useful to use prefixes like <code>sn-</code> for sidenotes and <code>mn-</code> for margin notes.</p>
-        <p>Immediately adjacent to that sidenote reference in the main text goes the sidenote content itself, in a <code>span</code> with class <code>sidenote</code>. This tag is also inserted directly in the middle of the body text, but is either pushed into the margin or hidden by default. Make sure to position your sidenotes correctly by keeping the sidenote-number label close to the sidenote itself.</p>
-        <p>If you want a sidenote without footnote-style numberings, then you want a margin note.
-          <label for="mn-demo" class="margin-toggle">&#8853;</label>
-          <input type="checkbox" id="mn-demo" class="margin-toggle"/>
-          <span class="marginnote">
-            This is a margin note. Notice there isn’t a number preceding the note.
-          </span> On large screens, a margin note is just a sidenote that omits the reference number. This lessens the distracting effect taking away from the flow of the main text, but can increase the cognitive load of matching a margin note to its referent text. However, on small screens, a margin note is like a sidenote except its viewability-toggle is a symbol rather than a reference number. This document currently uses the symbol &#8853; (<code>&amp;#8853;</code>), but it’s up to you.</p>
-        <p>Margin notes are created just like sidenotes, but with the <code>marginnote</code> class for the content and the <code>margin-toggle</code> class for the label and dummy checkbox. For instance, here is the code for the margin note used in the previous paragraph:</p>
-        <pre><code>&lt;label for="mn-demo" class="margin-toggle"&gt;&amp;#8853;&lt;/label&gt;
-&lt;input type="checkbox" id="mn-demo" class="margin-toggle"/&gt;
-&lt;span class="marginnote"&gt;
-  This is a margin note. Notice there isn’t a number preceding the note.
-&lt;/span&gt;</code></pre>
-        <p>Figures in the margin are created as margin notes, as demonstrated in the next section.</p>
-      </section>
+        <p> First, we split our dataset using a 75-25 split. 75% (1527 articles) of our data will be used to train our model, and the remaining 25% (510 articles) of the data will be saved until the end to test/validate our model. </p>
 
-      <section>
-        <h2 id="figures">Figures</h2>
-        <p>Tufte emphasizes tight integration of graphics with text. Data, graphs, and figures are kept with the text that discusses them. In print, this means they are not relegated to a separate page. On the web, that means readability of graphics and their accompanying text without extra clicks, tab-switching, or scrolling.</p>
-        <p>Figures should try to use the <code>figure</code> element, which by default are constrained to the main column. Don’t wrap figures in a paragraph tag. Any label or margin note goes in a regular margin note inside the figure. For example, most of the time one should introduce a figure directly into the main flow of discussion, like so:</p>
+        <p>Each model was trained using 10-fold cross validation, and the accuracy was computed. I used a combination of simple models and ensemble models. The results are below:</p>
+
+        <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+              overflow:hidden;padding:10px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+              font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+            .tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+            .tg .tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
+            </style>
+            <table class="tg">
+            <thead>
+              <tr>
+                <th class="tg-7btt">Model</th>
+                <th class="tg-7btt">Accuracy (mean +/- standard deviation)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="tg-c3ow">Logistic Regression</td>
+                <td class="tg-c3ow">0.7341 +/- 0.0248</td>
+              </tr>
+              <tr>
+                <td class="tg-c3ow">K-Nearest Neighbors</td>
+                <td class="tg-c3ow">0.7498 +/- 0.0362</td>
+              </tr>
+              <tr>
+                <td class="tg-c3ow">Naive Bayes</td>
+                <td class="tg-c3ow">0.7099 +/- 0.0428</td>
+              </tr>
+              <tr>
+                <td class="tg-c3ow">Support Vector Machine</td>
+                <td class="tg-c3ow">0.7623 +/- 0.0351</td>
+              </tr>
+              <tr>
+                <td class="tg-c3ow">AdaBoost</td>
+                <td class="tg-c3ow">0.7328 +/- 0.0332</td>
+              </tr>
+              <tr>
+                <td class="tg-c3ow">Bagging</td>
+                <td class="tg-c3ow">0.7256 +/- 0.0430</td>
+              </tr>
+              <tr>
+                <td class="tg-c3ow">Gradient Boosted</td>
+                <td class="tg-c3ow">0.7636 +/- 0.0253</td>
+              </tr>
+              <tr>
+                <td class="tg-c3ow">Random Forest</td>
+                <td class="tg-c3ow">0.7570 +/- 0.0370</td>
+              </tr>
+              <tr>
+                <td class="tg-c3ow">XGBoost</td>
+                <td class="tg-c3ow">0.7727 +/- 0.0535</td>
+              </tr>
+            </tbody>
+            </table>
+        
+        <p>We can see that the ensemble models (last five) did better on average than the simple models (first four). XGBoost was the model with the highest accuracy of about 77%. For the purposes of a binary classifier, accuracy is the sum of true positives and true negatives divided by the total number of samples.</p>
+
+        <p>To further evaluate these models, I chose a few of them and generated AUC-ROC (Area Under the Curve of a Receiver Operator Characteric Curve) plots. The higher the AUC value, the better the model is able to distinguish between the two categories at lower significance thresholds. </p>
+
         <figure>
-          <label for="mn-exports-imports" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-exports-imports" class="margin-toggle"/><span class="marginnote">From Edward Tufte, <em>Visual Display of Quantitative Information</em>, page 92.</span>
-          <img src="img/exports-imports.png" alt="Exports and Imports to and from Denmark & Norway from 1700 to 1780" />
+            <label for="auc" class="margin-toggle">&#8853;</label><input type="checkbox" id="pca" class="margin-toggle"/><span class="marginnote">Area Under the Curve of the Receiver Operating Characteristic Curve</span>
+            <img src="AUC-ROC_Curve.png" alt="AUC-ROC" />
+          </figure>
+        
+        <p>All of the models selected here have good AUC scores, but again, the XGBoost is the best model. Next, I validated the XGBoost model on the remaining 25% of the dataset.</p>
+
+        <figure>
+        <label for="confusion" class="margin-toggle">&#8853;</label><input type="checkbox" id="confusion" class="margin-toggle"/><span class="marginnote">Confusion Matrix of the XGBoost model on the Test Data</span>
+        <img src="confusion-matrix.png" alt="confusion matrix" />
         </figure>
 
-        <p><label for="mn-figure-1" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-figure-1" class="margin-toggle"/><span class="marginnote"><img src="img/rhino.png" alt="Image of a Rhinoceros"/>F.J. Cole, “The History of Albrecht Dürer’s Rhinoceros in Zooological Literature,” <em>Science, Medicine, and History: Essays on the Evolution of Scientific Thought and Medical Practice</em> (London, 1953), ed. E. Ashworth Underwood, 337-356. From page 71 of Edward Tufte’s <em>Visual Explanations</em>.</span> But tight integration of graphics with text is central to Tufte’s work even when those graphics are ancillary to the main body of a text. In many of those cases, a margin figure may be most appropriate. To place figures in the margin, just wrap an image (or whatever) in a margin note inside a <code>p</code> tag, as seen to the right of this paragraph.</p>
-        <p>If you need a full-width figure, give it the <code>fullwidth</code> class. Make sure that’s inside an <code>article</code>, and it will take up (almost) the full width of the screen. This approach is demonstrated below using Edward Tufte’s English translation of the Napoleon’s March data visualization. From <em>Beautiful Evidence</em>, page 122-124.</p>
-        <figure class="fullwidth">
-          <img src="img/napoleons-march.png" alt="Figurative map of the successive losses of the French Army in the Russian campaign, 1812-1813" />
-        </figure>
-        <p>One obstacle to creating elegant figures on the web is the difficulty of handling different screen sizes, especially on the fly. Embedded <code>iframe</code> elements are particularly troublesome. For these instances we provide a helper class, <code>iframe-wrapper</code>, the most common use for which is probably YouTube videos, e.g.</p>
-        <pre><code>&lt;figure class="iframe-wrapper"&gt;
-  &lt;iframe width="853" height="480" src="https://www.youtube.com/embed/YslQ2625TR4" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/figure&gt;</code></pre>
+        <p>In the confusion matrix above, we can see that the majority of the data were true negatives or true positives. We have more false negatives than false positives, likely because we had more left-leaning articles to begin with. This means our model skews slightly in favor of classifying articles has left-leaning. The testing accuracy of this model is 78%, which is comparable to the training accuracy. This means that our model is not over- or under-fitted to our data.</p>
+
+        <p>Finally, this model can likely be improved through hyper-parameter tuning. We could also experiment with pre-processing techniques such as normalization or re-sampling to remedy the issues with having an imbalanced dataset. However, for the purpose of this project, a 78% accuracy will be more than adequate.</p>
+
+      </section>
+
+      <section>
+        <h2 id="Web App">Web App</h2>
+        <p>This analysis and the machine learning model we build are only useful if they can be used on a variety of news articles. The purpose of the binary classifier is to be able to expand our scope beyond the 2,000 news articles we started with. By building this model, we can now theoretically determine if any news article on the Internet is more likely to be popular in a left- or right- leaning community.</p>
+        
+        <p>For the last part of this project, I built a web application to make recommendations on news articles. It begins by prompting the user for a topic. I then use the <a href="https://pypi.org/project/GoogleNews/">GoogleNews</a> Python library to locate 25 news articles about that topic. I use the same procedure as earlier to parse these articles, clean their contents, generate a document vector, and use the XGBoost classifier model to compute the probability of this article being popular in a left- or right-leaning subreddit. Finally, I take the two most extreme probabilities and recommend one left-leaning news article and one right-leaning news article to the user.</p>
+        
+        <p>There are limitations to this model. The process of scraping the news articles and using word2vec to generate the document vector takes a significant amount of time and processing power. For this reason, I was not able to deploy this web application and release it publicly, but I got a version running on my local computer. Here is a demo video:</p>
         <figure class="iframe-wrapper">
-          <iframe width="853" height="480" src="https://www.youtube.com/embed/YslQ2625TR4" frameborder="0" allowfullscreen></iframe>
-        </figure>
-        <p>You can use this class on a <code>div</code> instead of a <code>figure</code>, with slightly different results but the same general effect. Experiment and choose depending on your application.</p>
+            <iframe width="853" height="480" src="https://youtu.be/tgpTd4ocXXg" frameborder="0" allowfullscreen></iframe>
+          </figure>
+        
+
+        <p>And this is a screenshot of the results:</p>
+        <figure>
+            <label for="webapp" class="margin-toggle">&#8853;</label><input type="checkbox" id="webapp" class="margin-toggle"/><span class="marginnote">Screenshot of Web App</span>
+            <img src="webapp_demo.png" alt="web app" />
+            </figure>
+        
+        <p>In this example, I searched for articles using the keyword "president." The recommended articles were:</p>
+
+        <ul>Left-leaning: </ul>
+        <ul>Right-leaning: </ul>
+
+        <p>From reading these articles, it is apparent that I would classify these articles in a similar fashion. The first one is an opinion piece that portrays optimism for President-Elect Biden and Vice President-Elect Harris whereas the second one is a positive depiction of President Trump. </p>
       </section>
 
-      <section>
-        <h2 id="code">Code</h2>
-        <p>Technical jargon, programming language terms, and code samples are denoted with the <code>code</code> class, as I’ve been using in this document to denote HTML. Code needs to be monospace for formatting purposes and to aid in code analysis, but it must maintain its readability. To those ends, Tufte CSS follows GitHub’s font selection, which shifts gracefully along the monospace spectrum from the elegant but rare Consolas all the way to good old reliable Courier.</p>
-        <p>Extended code examples should live in a <code>code</code> element within a <code>pre</code> element. This adds control over indentation and overflow as well:</p>
-        <pre><code>;; Some code examples in Clojure. This is a comment.
-
-;; applying a function to every item in the collection
-(map tufte-css blog-posts)
-;;;; if unfamiliar, see http://www.lispcast.com/annotated-map
-
-;; side-effecty loop (unformatted, causing text overflow) - from https://clojuredocs.org/clojure.core/doseq
-(doseq [[[a b] [c d]] (map list (sorted-map :1 1 :2 2) (sorted-map :3 3 :4 4))] (prn (* b d)))
-
-;; that same side-effecty loop, formatted
-(doseq [[[a b] [c d]] (map list
-                           (sorted-map :1 1 :2 2)
-                           (sorted-map :3 3 :4 4))]
-  (prn (* b d)))
-
-;; If this proselytizing has worked, check out:
-;; http://howistart.org/posts/clojure/1</code></pre>
-      </section>
-
-      <section>
-        <h2 id="imagequilts">ImageQuilts</h2>
-        <p>Tufte CSS provides support for Edward Tufte and Adam Schwartz’s <a href="http://imagequilts.com/">ImageQuilts</a>. See the <a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003wk">ET forum announcement thread</a> for more on quilts. Some have ragged edges, others straight. Include these images just as you would any other <code>figure</code>.</p>
-        <p>This is an ImageQuilt surveying Chinese calligraphy, placed in a full-width figure to accomodate its girth:</p>
-        <figure class="fullwidth"><img src="img/imagequilt-chinese-calligraphy.png" alt="Image of Chinese Calligraphy"/></figure>
-        <p>Here is an ImageQuilt of 47 animal sounds over and over, in a figure constrained to the main text region. This quilt has ragged edges, but the image itself is of course still rectangular.</p>
-        <figure><img src="img/imagequilt-animal-sounds.png" alt="Image of animal sounds"/></figure>
-      </section>
-
-      <section>
-        <h2 id="epilogue">Epilogue</h2>
-        <p>Many thanks go to Edward Tufte for leading the way with his work. It is only through his kind and careful editing that this project accomplishes what it does. All errors of implementation are of course mine.</p>
-      </section>
     </article>
   </body>
 </html>
-
-<!-- https://youtu.be/tgpTd4ocXXg -->
