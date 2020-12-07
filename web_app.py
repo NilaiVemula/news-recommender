@@ -146,6 +146,7 @@ st.write("Woohoo! I created a 300-dimensional vector space to describe these art
 predictions = classifier.predict_proba(all_vectors)
 df['prediction'] = predictions[:,0]
 
+df.sort_values(by=['prediction'], inplace=True)
 
 googlenews.clear()
 
@@ -154,7 +155,8 @@ googlenews.clear()
 st.header("Left-leaning")
 
 if(len(df[df['prediction'] > 0.5])):
-    st.write(df[df['prediction'] > 0.5]['url'].iloc[0])
+    st.write(df['url'].iloc[0])
+    
 else:
     st.write('Sorry, I could not find any articles for you.')
 
@@ -162,6 +164,6 @@ else:
 st.header("Right-leaning")
 
 if(len(df[df['prediction'] < 0.5])):
-    st.write(df[df['prediction'] < 0.5]['url'].iloc[0])
+    st.write(df['url'].iloc[-1])
 else:
     st.write('Sorry, I could not find any articles for you.')
