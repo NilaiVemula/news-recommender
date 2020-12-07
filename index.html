@@ -19,16 +19,28 @@
       </section>
 
       <section>
-        <h2 id="data">Getting Data</h2>
-        <p>To use Tufte CSS, copy <code>tufte.css</code> and the <code>et-book</code> directory of font files to your project directory, then add the following to your HTML document’s <code>head</code> block:</p>
+        <h2 id="data">Collecting Data</h2>
+        <p>The source of my annotated data was in the form of Reddit posts. Forums on Reddit called subreddits have topics that span the spectrum in discussing science to relationships. I chose 8 of these subreddits with explicit political lean:</p>
 
-        <pre><code>&lt;link rel="stylesheet" href="write-up/tufte.css"/&gt;</code></pre>
+        <ul><a href="https://reddit.com/r/Conservative"></a>r/Conservative</a></ul>
+        <ul><a href="https://reddit.com/r/Republican"></a>r/Republican</a></ul>
+        <ul><a href="https://reddit.com/r/donaldtrump"></a>r/donaldtrump</a></ul>
+        <ul><a href="https://reddit.com/r/Anarcho_Capitalism"></a>r/Anarcho_Capitalism</a></ul>
+        <ul><a href="https://reddit.com/r/Liberal"></a>r/Liberal</a></ul>
+        <ul><a href="https://reddit.com/r/Democrats"></a>r/Democrats</a></ul>
+        <ul><a href="https://reddit.com/r/JoeBiden"></a>r/JoeBiden</a></ul>
+        <ul><a href="https://reddit.com/r/LateStageCapitalism"></a>r/LateStageCapitalism</a></ul>
 
-        <p>Now you just have to use the provided CSS rules, and the Tufte CSS conventions described in this document. For best results, View Source and Inspect Element frequently.</p>
+        The first four of these subreddits I classified as having a "right-leaning" bias whereas the last four have a "left-leaning" bias. These communities were chosen because they all have a generally large reach (>100k members) and embody the diversity in each of these two categories. Out of the four, one was based off of general ideology (conservative or liberal), one on political party (Republican or Democrat), one on political leader (Donald Trump or Joe Biden), and one representing a more fringe ideology (late stage capitalism or anarcocapitalism). Very popular subreddits such as <a href="https://reddit.com/r/politics">r/politics</a> and <a href="https://reddit.com/r/libertarian">r/libertarian</a> were excluded because they do not have an explicit political lean in the "right"-"left" binary.
+
+        My hypothesis is that news articles that become popular in these subreddits are representative of articles that form of the media diet of people of that group's corresponding political lean. In some cases, this theory breaks down. For example, the most popular post in r/conservative is a <a href="https://www.reddit.com/r/Conservative/comments/jpu2rx/ap_has_called_the_election_for_joe_biden/">news article proclaiming Joe Biden's 2020 Presidential election victory</a>. This article is not particularly informative for categorizing the population of r/conservative, and was likely popular due to the larger Reddit audience "upvoting" the post. For this reason, I selected more than just the top few most popular posts, and I did not weight further analysis on how popular each post was.
+
+        From each of these subreddits, I collected the 1,000 most popular posts (or "top" in Reddit lingo) using a Python library called <a href="">praw</a>. I then checked if a post contained a link to a news article, and used the <a href="">newspaper3k</a> library to parse these articles. The final output of the data collection phase was a <a href="">spreadsheet</a> of over 2,000 links to news articles, a cleaned version of their content, their corresponding Reddit post, and some data about that post.
+
       </section>
 
       <section>
-        <h2 id="fundamentals">Fundamentals</h2>
+        <h2 id="cleaning">Preparing Our Data</h2>
         <h3 id="fundamentals--sections-and-headers">Sections and Headings</h3>
         <p>Organize your document with an <code>article</code> element inside your <code>body</code> tag. Inside that, use <code>section</code> tags around each logical grouping of text and headings.</p>
         <p>Tufte CSS uses <code>h1</code> for the document title, <code>p</code> with class <code>subtitle</code> for the document subtitle, <code>h2</code> for section headings, and <code>h3</code> for low-level headings. More specific headings are not supported. If you feel the urge to reach for a heading of level 4 or greater, consider redesigning your document:</p>
