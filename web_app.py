@@ -46,7 +46,7 @@ config.browser_user_agent = user_agent
 
 # set up word2vec model
 filename = 'models/GoogleNews-vectors-negative300.bin.gz'
-#model = gensim.models.KeyedVectors.load_word2vec_format(filename, binary=True)
+model = gensim.models.KeyedVectors.load_word2vec_format(filename, binary=True)
 
 # set up classification model
 classifier=pickle.load(open('models/xgboost_trained.pickle','rb'))
