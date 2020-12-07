@@ -22,20 +22,74 @@
         <h2 id="data">Collecting Data</h2>
         <p>The source of my annotated data was in the form of Reddit posts. Forums on Reddit called subreddits have topics that span the spectrum in discussing science to relationships. I chose 8 of these subreddits with explicit political lean:</p>
 
-        <ul><a href="https://reddit.com/r/Conservative"></a>r/Conservative</a></ul>
-        <ul><a href="https://reddit.com/r/Republican"></a>r/Republican</a></ul>
-        <ul><a href="https://reddit.com/r/donaldtrump"></a>r/donaldtrump</a></ul>
-        <ul><a href="https://reddit.com/r/Anarcho_Capitalism"></a>r/Anarcho_Capitalism</a></ul>
-        <ul><a href="https://reddit.com/r/Liberal"></a>r/Liberal</a></ul>
-        <ul><a href="https://reddit.com/r/Democrats"></a>r/Democrats</a></ul>
-        <ul><a href="https://reddit.com/r/JoeBiden"></a>r/JoeBiden</a></ul>
-        <ul><a href="https://reddit.com/r/LateStageCapitalism"></a>r/LateStageCapitalism</a></ul>
+        <ul><a href="https://reddit.com/r/Conservative">r/Conservative</a></ul>
+        <ul><a href="https://reddit.com/r/Republican">r/Republican</a></ul>
+        <ul><a href="https://reddit.com/r/donaldtrump">r/donaldtrump</a></ul>
+        <ul><a href="https://reddit.com/r/Anarcho_Capitalism">r/Anarcho_Capitalism</a></ul>
+        <ul><a href="https://reddit.com/r/Liberal">r/Liberal</a></ul>
+        <ul><a href="https://reddit.com/r/Democrats">r/Democrats</a></ul>
+        <ul><a href="https://reddit.com/r/JoeBiden">r/JoeBiden</a></ul>
+        <ul><a href="https://reddit.com/r/LateStageCapitalism">r/LateStageCapitalism</a></ul>
 
-        The first four of these subreddits I classified as having a "right-leaning" bias whereas the last four have a "left-leaning" bias. These communities were chosen because they all have a generally large reach (>100k members) and embody the diversity in each of these two categories. Out of the four, one was based off of general ideology (conservative or liberal), one on political party (Republican or Democrat), one on political leader (Donald Trump or Joe Biden), and one representing a more fringe ideology (late stage capitalism or anarcocapitalism). Very popular subreddits such as <a href="https://reddit.com/r/politics">r/politics</a> and <a href="https://reddit.com/r/libertarian">r/libertarian</a> were excluded because they do not have an explicit political lean in the "right"-"left" binary.
+        <p>The first four of these subreddits I classified as having a "right-leaning" bias whereas the last four have a "left-leaning" bias. These communities were chosen because they all have a generally large reach (>100k members) and embody the diversity in each of these two categories. Out of the four, one was based off of general ideology (conservative or liberal), one on political party (Republican or Democrat), one on political leader (Donald Trump or Joe Biden), and one representing a more fringe ideology (late stage capitalism or anarcocapitalism). Very popular subreddits such as <a href="https://reddit.com/r/politics">r/politics</a> and <a href="https://reddit.com/r/libertarian">r/libertarian</a> were excluded because they do not have an explicit political lean in the "right"-"left" binary.</p>
 
-        My hypothesis is that news articles that become popular in these subreddits are representative of articles that form of the media diet of people of that group's corresponding political lean. In some cases, this theory breaks down. For example, the most popular post in r/conservative is a <a href="https://www.reddit.com/r/Conservative/comments/jpu2rx/ap_has_called_the_election_for_joe_biden/">news article proclaiming Joe Biden's 2020 Presidential election victory</a>. This article is not particularly informative for categorizing the population of r/conservative, and was likely popular due to the larger Reddit audience "upvoting" the post. For this reason, I selected more than just the top few most popular posts, and I did not weight further analysis on how popular each post was.
+        <p>My hypothesis is that news articles that become popular in these subreddits are representative of articles that form of the media diet of people of that group's corresponding political lean. In some cases, this theory breaks down. For example, the most popular post in r/conservative is a <a href="https://www.reddit.com/r/Conservative/comments/jpu2rx/ap_has_called_the_election_for_joe_biden/">news article proclaiming Joe Biden's 2020 Presidential election victory</a>. This article is not particularly informative for categorizing the population of r/conservative, and was likely popular due to the larger Reddit audience "upvoting" the post. For this reason, I selected more than just the top few most popular posts, and I did not weight further analysis on how popular each post was.</p>
 
-        From each of these subreddits, I collected the 1,000 most popular posts (or "top" in Reddit lingo) using a Python library called <a href="https://github.com/praw-dev/praw">praw</a>, which is a wrapper on the Reddit API. I then checked if a post contained a link to a news article, and used the <a href="https://github.com/codelucas/newspaper">newspaper3k</a> library to scrape and parse these articles. The final output of the data collection phase was a <a href="https://github.com/NilaiVemula/news-recommender/tree/main/data">spreadsheet</a> of over 2,000 links to news articles, a cleaned version of their content, their corresponding Reddit post, and some data about that post.
+        <p>From each of these subreddits, I collected the 1,000 most popular posts (or "top" in Reddit lingo) using a Python library called <a href="https://github.com/praw-dev/praw">praw</a>, which is a wrapper on the Reddit API. I then checked if a post contained a link to a news article, and used the <a href="https://github.com/codelucas/newspaper">newspaper3k</a> library to scrape and parse these articles. The final output of the data collection phase was a <a href="https://github.com/NilaiVemula/news-recommender/tree/main/data">spreadsheet</a> of over 2,000 links to news articles, a cleaned version of their content, their corresponding Reddit post, and some data about that post.</p>
+
+        <p>Overall, 2,321 articles were collected from the 8,000 Reddit posts analyzed, but these articles were not found evenly across the subreddits above. After filtering out articles with less than 50 characters of content and posts with messing data, we were left with 2,037 total articles from the following subreddits:</p>
+
+        <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+              overflow:hidden;padding:10px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+              font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+            .tg .tg-baqh{text-align:center;vertical-align:top}
+            .tg .tg-amwm{font-weight:bold;text-align:center;vertical-align:top}
+            </style>
+            <table class="tg">
+            <thead>
+              <tr>
+                <th class="tg-amwm">subreddit</th>
+                <th class="tg-amwm">Number of News Articles</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="tg-baqh">r/Liberal</td>
+                <td class="tg-baqh">850</td>
+              </tr>
+              <tr>
+                <td class="tg-baqh">r/Democrats</td>
+                <td class="tg-baqh">386</td>
+              </tr>
+              <tr>
+                <td class="tg-baqh">r/Republican</td>
+                <td class="tg-baqh">349</td>
+              </tr>
+              <tr>
+                <td class="tg-baqh">r/Conservative</td>
+                <td class="tg-baqh">325</td>
+              </tr>
+              <tr>
+                <td class="tg-baqh">r/JoeBiden</td>
+                <td class="tg-baqh">103</td>
+              </tr>
+              <tr>
+                <td class="tg-baqh">r/donaldtrump</td>
+                <td class="tg-baqh">14</td>
+              </tr>
+              <tr>
+                <td class="tg-baqh">r/LateStageCapitalism</td>
+                <td class="tg-baqh">9</td>
+              </tr>
+              <tr>
+                <td class="tg-baqh">r/Anarcho_Capitalism</td>
+                <td class="tg-baqh">1</td>
+              </tr>
+            </tbody>
+            </table>
 
       </section>
 
