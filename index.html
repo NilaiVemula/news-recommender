@@ -20,7 +20,7 @@
 
       <section>
         <h2 id="data">Collecting Data</h2>
-        <p>The source of my annotated data was in the form of Reddit posts. Forums on Reddit called subreddits have topics that span the spectrum in discussing science to relationships. I chose 8 of these subreddits with explicit political lean:</p>
+        <p>The source of my annotated data was in the form of Reddit posts. Forums on Reddit called subreddits have topics that span the spectrum in discussing science to relationships. This is an excellent data choice for this project as these subreddits are essentially echo chambers as nearly all members of the group join to read and engage with material that is supportive of the subreddit's overall topic. I chose 8 of these subreddits with explicit political lean:</p>
 
         <ul><a href="https://reddit.com/r/Conservative">r/Conservative</a></ul>
         <ul><a href="https://reddit.com/r/Republican">r/Republican</a></ul>
@@ -90,32 +90,42 @@
               </tr>
             </tbody>
             </table>
+        
+        <p>We have more articles from left-leaning subreddits and more articles from the broader groups. The subreddits focused on candidates and fringe ideologies had few news articles that became popular in the subreddit when shared.</p>
 
       </section>
 
       <section>
-        <h2 id="cleaning">Preparing Our Data</h2>
-        <h3 id="fundamentals--sections-and-headers">Sections and Headings</h3>
-        <p>Organize your document with an <code>article</code> element inside your <code>body</code> tag. Inside that, use <code>section</code> tags around each logical grouping of text and headings.</p>
-        <p>Tufte CSS uses <code>h1</code> for the document title, <code>p</code> with class <code>subtitle</code> for the document subtitle, <code>h2</code> for section headings, and <code>h3</code> for low-level headings. More specific headings are not supported. If you feel the urge to reach for a heading of level 4 or greater, consider redesigning your document:</p>
-        <blockquote cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000hB">
-          <p>[It is] notable that the Feynman lectures (3 volumes) write about all of physics in 1800 pages, using only 2 levels of hierarchical headings: chapters and A-level heads in the text. It also uses the methodology of <em>sentences</em> which then cumulate sequentially into <em>paragraphs</em>, rather than the grunts of bullet points. Undergraduate Caltech physics is very complicated material, but it didn’t require an elaborate hierarchy to organize.</p>
-          <footer><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000hB">Edward Tufte, forum post, ‘Book design: advice and examples’ thread</a></footer>
-        </blockquote>
-        <p>As a bonus, this excerpt regarding the use of headings provides an example of block quotes. In Tufte CSS they are just lightly styled, semantically correct HTML using <code>blockquote</code> and <code>footer</code> elements. See page 20 of <a href="https://www.edwardtufte.com/tufte/books_vdqi">The Visual Display of Quantitative Information</a> for an example in print.</p>
-        <p><span class="newthought">In his later books<label for="sn-in-his-later-books" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="sn-in-his-later-books" class="margin-toggle"/><span class="sidenote"><a href="http://www.edwardtufte.com/tufte/books_be"><em>Beautiful Evidence</em></a></span>, Tufte starts each section with a bit of vertical space, a non-indented paragraph, and the first few words of the sentence set in small caps. For this we use a span with the class <code>newthought</code>, as demonstrated at the beginning of this paragraph. Vertical spacing is accomplished separately through <code>&lt;section&gt;</code> tags. Be consistent: though we do so in this paragraph for the purpose of demonstration, do not alternate use of header elements and the <code>newthought</code> technique. Pick one approach and stick to it.</p>
+        <h2 id="preparing">Preparing Our Data</h2>
+        <p>In order to use the content of these news articles in a machine learning model, we must first transform this text data into some sort of numeric format. I had heavy use of several Python libraries for this purpose. <a href="https://www.nltk.org/">nltk</a> is a general purpose Natural Language Processing (NLP) package with the ability to organize text data, remove stop words, preform tagging, etc., and <a href="https://radimrehurek.com/gensim/">gensim</a> combines vector-based modeling with topic modeling and document indexing.</p>
 
-        <h3 id="fundamentals--text">Text</h3>
-        <p>Although paper handouts obviously have a pure white background, the web is better served by the use of slightly off-white and off-black colors. Tufte CSS uses <code>#fffff8</code> and <code>#111111</code> because they are nearly indistinguishable from their ‘pure’ cousins, but dial down the harsh contrast. We stick to the greyscale for text, reserving color for specific, careful use in figures and images.</p>
-        <p>In print, Tufte has used the proprietary Monotype Bembo<label for="sn-proprietary-monotype-bembo" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-proprietary-monotype-bembo" class="margin-toggle"/><span class="sidenote">See Tufte’s comment in the <a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000Vt">Tufte book fonts</a> thread.</span> font. A similar effect is achieved in digital formats with the now open-source <a href="https://github.com/edwardtufte/et-book">ETBook</a>, which Tufte CSS supplies with a <code>@font-face</code> reference to a .ttf file. In case ETBook somehow doesn’t work, Tufte CSS shifts gracefully to other serif fonts like Palatino and Georgia.</p>
-        <p>Also notice how Tufte CSS includes separate font files for bold (strong) and italic (emphasis), instead of relying on the browser to mechanically transform the text. This is typographic best practice.</p>
-        <p class="sans">If you prefer sans-serifs, use the <code>sans</code> class. It relies on Gill Sans, Tufte’s sans-serif font of choice.</p>
-        <p>Links in Tufte CSS match the body text in color and do not change on mouseover or when clicked. Here is a <a href="#">dummy example</a> that goes nowhere. These links are underlined, since this is the most widely recognized indicator of clickable text. <label for="mn-blue-links" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-blue-links" class="margin-toggle"/><span class="marginnote">Blue text, while also a widely recognizable clickable-text indicator, is crass and distracting. Luckily, it is also rendered unnecessary by the use of underlining.</span> However, because most browsers’ default underlining does not clear descenders and is so thick and distracting, the underline effect is instead achieved using CSS trickery involving background gradients instead of standard <code>text-decoration</code>. Credit goes to Adam Schwartz for that technique.</p>
-        <p>As always, these design choices are merely one approach that Tufte CSS provides by default. Other approaches can also be made to work. The goal is to make sentences readable without interference from links, as well as to make links immediately identifiable even by casual web users.</p>
+        <p>First, I used nltk to tokenize (or separate) the article into individual words; remove stop words such as "a", "the", or punctuation; and compute word frequencies of the most used words in each article. For example, <a href="https://apnews.com/f0e2af5f9f99de9d30dc6b9097121188">this article</a> about President Trump's infamous $750 income tax payment uses the word "president" 12 times, "donald" 3 times, and "trump" 20 times.</p>
+
+        <p>Then, I loaded a <a href="https://code.google.com/archive/p/word2vec/">word2vec model</a> which was pre-trained on a Google News dataset of about 100 billion words. This model fits well with our goal of vectorizing news articles. A <a href="https://en.wikipedia.org/wiki/Word2vec">word2vec</a> model works by creating a 300-dimension vector space. A word is a point in that vector space and is defined as a linear combination of 300 basis vectors. The similarity between two words can be computed using the distance between those two words in the vector space. <label for="sn-cosine" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-cosine" class="margin-toggle"/><span class="sidenote">Technically, the cosine similarity between two vectors is representative of the semantic similarity between those two words in the context of the corpus that the model was trained on.</span>This model has a few shortcoming, though. From a performance perspective, it is over 6 gb and takes several minutes to load into RAM on my computer. Additionally, the model is from 2013, so many recent developments such as COVID-19 and BLM are not part of the model. </p>
+
+        <p>In order to represent a news article as a set of numbers, I decided to create a "document vector" for each article. I approximated a <a href="https://arxiv.org/abs/1405.4053">doc2vec</a> approach, by using the previous word2vec model to generate a 300-dimensional vector for each word in each article. I then combined these vectors all words in an article, weighted by the frequency of those words. In the end, each article is represented by a 300-dimensional vector. </p>
+
+        <p>It is important to note that these models are "bag-of-word" approaches. This means that they consider each news article as a collection of terms. There is no analysis of the relationship between words or the context that the words are used. While this is different from how you and I might assess bias of an article, this "bag-of-word" approach is common in NLP and has the added bonus of being computationally efficient.</p>
+
+        <p>Repeating the aforementioned steps for all 2,000+ articles, we can fill up a 3,000 dimensional vector space with 2,000+ points. This vector space is obviously impossible to properly visualize as it is more than 3-dimensions; however, I can use <a href="https://en.wikipedia.org/wiki/Principal_component_analysis"> principal component analysis (PCA)</a> as a dimensionality reduction technique. This algorithm allows us to extract the two orthogonal basis vectors that explain the most variance in the dataset.</p>
+
+        <p> We can plot these the data in terms of these two orthogonal basis vectors and color each point by the political lean of the article. Red points represent articles collected from right-leaning subreddits, and blue points represent articles collected from left-leaning subreddits.</p>
+
+        <figure>
+            <label for="pca" class="margin-toggle">&#8853;</label><input type="checkbox" id="pca" class="margin-toggle"/><span class="marginnote">Principal Components 1 and 2</span>
+            <img src="PCA.png" alt="PCA" />
+          </figure>
+        
+        <p>It is disappointing that there is not a clear separation between the blue and red points. This indicates that our classification model will have a difficult time distinguishing between the two types of articles. However, if we look at the plot below, we can see that the first two principal components make up a very small percent of the overall variance in the dataset. Our classification model will therefore likely use many more than 2 out of 300 features.</p>
+
+        <figure>
+        <label for="pca2" class="margin-toggle">&#8853;</label><input type="checkbox" id="pca2" class="margin-toggle"/><span class="marginnote">Explained Variance by Principal Components</span>
+        <img src="PCA2.png" alt="PCA2" />
+        </figure>
       </section>
 
       <section>
-        <h2 id="epigraphs">Epigraphs</h2>
+        <h2 id="classification">Building a Binary Classifier</h2>
         <div class="epigraph">
           <blockquote>
             <p>The English language . . . becomes ugly and inaccurate because our thoughts are foolish, but the slovenliness of our language makes it easier for us to have foolish thoughts.</p>
