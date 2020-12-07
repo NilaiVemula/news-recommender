@@ -28,6 +28,7 @@ import pickle
 # classification
 import gensim
 
+print("SUCCESSFULLY IMPORTED ALL LIBRARIES")
 
 st.write("This is an application for finding news articles that are predicted to be popular in left-leaning or right-reading subreddits. Give me a few moments while I get set-up...")
 
