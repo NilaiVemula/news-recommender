@@ -58,7 +58,7 @@ st.write("Please enter a news topic below. The default is 'president'.")
 
 user_input = st.text_input("news topic", 'president')
 
-st.write("Thanks! Give me a few minutes to run your analysis. You might want to grab a coffee...")
+st.write(f"Thanks! Give me a few minutes to run your analysis on the search term: {user_input}. You might want to grab a coffee...")
 
 ### Run analysis
 
@@ -78,6 +78,7 @@ def clean_text(input_string):
     clean_string = ' '.join(clean_string.split())
     return clean_string
 
+st.write("Good news! I found some news articles using Google News!")
 
 # parse articles
 data = {}
@@ -99,6 +100,8 @@ for google_news_article in articles:
 df = pd.DataFrame(data.items(), columns=['url','website_text'])
 df.dropna(inplace=True)
 df = df[df['website_text'].str.len() > 50]
+
+st.write("I just finished reading through those articles. They seem interesting!")
 
 # nlp pre-processing
 
@@ -135,6 +138,8 @@ for index, row in df.iterrows():
         total_zeros+=1
         all_vectors[index]=document_vector
 
+
+st.write("Woohoo! I created a 300-dimensional vector space to describe these articles using ~linear algebra~. Let me classify them now! Stay tuned!")
 
 # classification
 predictions = classifier.predict_proba(all_vectors)
