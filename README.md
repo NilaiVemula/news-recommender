@@ -1,6 +1,6 @@
 # News Recommender
 
-Nilai Vemula
+Nilai Vemula, December 2020
 
 Category: Text Analysis/ Natural Language Processing
 
